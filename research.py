@@ -13,8 +13,8 @@ Q = 100
 I = 50
 
 lambda_b = 0.1
-lambda_s = 1
-lambda_c = 0.5
+lambda_s = 0.4
+lambda_c = 0.4
 
 obj_list = []
 t_list = []
@@ -26,7 +26,7 @@ I_list = []
 Q_list = []
 
 #This is where we define how the objective function behaves as a 
-for t in range(1, 201):
+for t in range(1, 500):
     
     t_doubleprime = (Q + (lambda_s + lambda_c - lambda_b)*t)/(lambda_s + lambda_c)
     t_prime = I/(lambda_s + lambda_c)
@@ -44,8 +44,8 @@ for t in range(1, 201):
     t_list.append(t)
 
 
-# plt.plot(t_list, obj_list)
-# plt.show()
+plt.plot(t_list, obj_list)
+plt.show()
 
 opt_obj = max(obj_list)
 
@@ -71,11 +71,15 @@ for i in range(0, opt_t):
         Q_list.append(Q)
         
 
-for i in range(0, 200):
-    I = 0
+for i in range(0, 1000):
+    
     if Q >= 0:
         Q = Q - lambda_s - lambda_c
         Q_list.append(Q)
+        if I >=0:
+            I = I - lambda_s
+        else:
+            I = 0
         I_list.append(I)
 
 
